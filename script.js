@@ -7,6 +7,10 @@
   var SLIDES = [
     { src: 'assets/hero-volleyball-v2.jpg', altKey: 'altHero' },
     { src: 'assets/about-stretch-v2.jpg', altKey: 'altStretch' },
+    { src: 'assets/diana_treatment02.jpg', altKey: 'altTreatment1' },
+    { src: 'assets/diana_dumbbell.jpg', altKey: 'altTreatment2' },
+    { src: 'assets/diana_client.jpg', altKey: 'altClient' },
+    { src: 'assets/diana_needle.jpg', altKey: 'altNeedle' },
   ];
 
   var ICONS = {
@@ -96,6 +100,10 @@
         altSlide: 'Halo Health Physio',
         altHero: "Diana Chen with the New Zealand Men's Volleyball team",
         altStretch: "Diana Chen leading a stretching session with the New Zealand Men's Volleyball team",
+        altTreatment1: "Diana Chen guiding a client through a hip and knee stretch",
+        altTreatment2: 'Diana Chen celebrating a strength milestone with a client',
+        altClient: "Diana Chen reviewing a client's assessment at the clinic desk",
+        altNeedle: 'Diana Chen performing dry needling treatment',
       },
       services: [
         { title: 'Physiotherapy',
@@ -202,6 +210,10 @@
         altSlide: 'Halo Health 物理治療診所',
         altHero: 'Diana Chen 與紐西蘭男子排球隊',
         altStretch: 'Diana Chen 帶領紐西蘭男子排球隊進行伸展訓練',
+        altTreatment1: 'Diana Chen 指導客戶進行髖部與膝蓋伸展',
+        altTreatment2: 'Diana Chen 與客戶一同慶祝訓練里程碑',
+        altClient: 'Diana Chen 於診所內與客戶討論評估結果',
+        altNeedle: 'Diana Chen 進行乾針治療',
       },
       services: [
         { title: '物理治療',
@@ -308,6 +320,10 @@
         altSlide: 'Halo Health 物理治疗诊所',
         altHero: 'Diana Chen 与新西兰男子排球队',
         altStretch: 'Diana Chen 带领新西兰男子排球队进行伸展训练',
+        altTreatment1: 'Diana Chen 指导客户进行髋部与膝盖伸展',
+        altTreatment2: 'Diana Chen 与客户一同庆祝训练里程碑',
+        altClient: 'Diana Chen 于诊所内与客户讨论评估结果',
+        altNeedle: 'Diana Chen 进行干针治疗',
       },
       services: [
         { title: '物理治疗',
