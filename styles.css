@@ -65,6 +65,7 @@ button { font-family: var(--fb); }
   .quotes-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
   .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
   .slideshow { min-height: 360px !important; }
+  #about-photo-alt { height: 380px !important; }
 }
 @media (max-width: 960px) {
   .site-header { flex-wrap: wrap !important; gap: 4px !important; padding: 12px 24px !important; }
@@ -100,6 +101,7 @@ button { font-family: var(--fb); }
   .svc-row { gap: 16px !important; justify-items: start; padding: 24px 20px !important; }
   .diana-strip { grid-template-columns: 1fr !important; gap: 20px !important; text-align: center; justify-items: center; }
   .slideshow { min-height: 280px !important; }
+  #about-photo-alt { height: 300px !important; }
   .review-stack { min-height: 210px !important; }
   .review-quote { font-size: 19px !important; }
   .price-heads { display: none !important; }
