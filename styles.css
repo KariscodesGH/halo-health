@@ -122,3 +122,11 @@ button { font-family: var(--fb); }
 @media (max-width: 340px) {
   .wordmark { display: none !important; }
 }
+
+
+/* ── SEO build: nav and call-to-action controls are links now ─────────── */
+a.nav-link, a.m-link, a.foot-link, a.book-btn { text-decoration: none; }
+a.brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; text-decoration: none; }
+a.nav-link { display: inline-block; }
+a.m-link { display: block; }
+img.slide { display: block; }

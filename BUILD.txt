@@ -1,0 +1,8 @@
+Halo Health Physio - static site
+Build date : 2026-09-01
+Build time : 10:01:19  (rebuilds on the same day differ here)
+Pages      : /  /services/  /about/  /prices/  /book/
+Files      : this folder should contain 404.html and .nojekyll.
+             If it does not, it is an older build - get the current one.
+Paths      : relative, so opening index.html from disk renders correctly.
+             Clicking between pages still needs a web server.

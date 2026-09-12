@@ -1,24 +1,69 @@
 (function () {
   'use strict';
 
+  // Pages sit at different depths (/ and /services/) and share this file, so
+  // asset paths are resolved against the base each page declares on <body>.
+  var BASE = (document.body && document.body.getAttribute('data-base')) || './';
+
+  var PAGE_TITLES = {
+    "en": {
+      "home": "Physiotherapy in Christchurch | Halo Health Physio",
+      "services": "Physiotherapy Services in Christchurch | Halo Health",
+      "about": "Diana Chen, Christchurch Physiotherapist | Halo Health",
+      "prices": "Physio Prices & ACC Cover, Christchurch | Halo Health",
+      "booking": "Book a Physio Appointment, Christchurch | Halo Health"
+    },
+    "zh-Hant": {
+      "home": "基督城物理治療 | Halo Health 物理治療",
+      "services": "基督城物理治療服務 | Halo Health",
+      "about": "Diana Chen 物理治療師 · 基督城 | Halo Health",
+      "prices": "物理治療收費與 ACC | Halo Health 基督城",
+      "booking": "預約物理治療 · 基督城 | Halo Health"
+    },
+    "zh-Hans": {
+      "home": "基督城物理治疗 | Halo Health 物理治疗",
+      "services": "基督城物理治疗服务 | Halo Health",
+      "about": "Diana Chen 物理治疗师 · 基督城 | Halo Health",
+      "prices": "物理治疗收费与 ACC | Halo Health 基督城",
+      "booking": "预约物理治疗 · 基督城 | Halo Health"
+    }
+  };
+  var SEO_H1 = {
+    "en": {
+      "services": "Physiotherapy Services in Christchurch",
+      "about": "Meet Diana Chen, Christchurch Physiotherapist",
+      "prices": "Physiotherapy Prices and ACC Cover"
+    },
+    "zh-Hant": {
+      "services": "基督城物理治療服務",
+      "about": "認識 Diana Chen，基督城物理治療師",
+      "prices": "物理治療收費與 ACC 給付"
+    },
+    "zh-Hans": {
+      "services": "基督城物理治疗服务",
+      "about": "认识 Diana Chen，基督城物理治疗师",
+      "prices": "物理治疗收费与 ACC 补助"
+    }
+  };
+
   var SLIDESHOW_SECONDS = 4;
   var KEN_BURNS = true;
 
   var SLIDES = [
-    { src: 'assets/hero-volleyball-v2.jpg', altKey: 'altHero' },
-    { src: 'assets/about-stretch-v2.jpg', altKey: 'altStretch' },
-    { src: 'assets/diana_treatment02.jpg', altKey: 'altTreatment1' },
-    { src: 'assets/diana_dumbbell.jpg', altKey: 'altTreatment2' },
-    { src: 'assets/diana_client.jpg', altKey: 'altClient' },
-    { src: 'assets/diana_needle.jpg', altKey: 'altNeedle' },
+    { src: BASE + 'assets/hero-volleyball-v2.jpg', altKey: 'altHero' },
+    { src: BASE + 'assets/about-stretch-v2.jpg', altKey: 'altStretch' },
+    { src: BASE + 'assets/diana_treatment02.jpg', altKey: 'altTreatment1' },
+    { src: BASE + 'assets/diana_dumbbell.jpg', altKey: 'altTreatment2' },
+    { src: BASE + 'assets/diana_client.jpg', altKey: 'altClient' },
+    { src: BASE + 'assets/diana_needle.jpg', altKey: 'altNeedle' },
   ];
 
   var ICONS = {
-    iconPerson: 'assets/icon-person-v2.svg',
-    iconHandHeart: 'assets/icon-handheart-v2.svg',
-    iconDryNeedling: 'assets/icon-dryneedling-v2.png',
-    iconVenus: 'assets/icon-venus-v2.svg',
-    iconSprout: 'assets/icon-sprout-v2.svg',
+    iconPerson: BASE + 'assets/icon-person-v2.svg',
+    iconHandHeart: BASE + 'assets/icon-handheart-v2.svg',
+    iconDryNeedling: BASE + 'assets/icon-dryneedling-v2.png',
+    iconVenus: BASE + 'assets/icon-venus-v2.svg',
+    iconSprout: BASE + 'assets/icon-sprout-v2.svg',
   };
   var SERVICES_BASE = [
     { id: 'physio', iconRes: 'iconPerson' },
@@ -390,7 +435,7 @@
   }
 
   var state = {
-    page: 'home',
+    page: (document.body && document.body.getAttribute('data-page-key')) || 'home',
     lang: detectLang(),
     slide: 0,
     review: 0,
@@ -407,6 +452,7 @@
   var timer = null;
   function startTimer() {
     clearInterval(timer);
+    if (!el('#slide-0')) return;
     timer = setInterval(function () {
       setState(function (s) {
         return { slide: (s.slide + 1) % SLIDES.length, review: (s.review + 1) % 2 };
@@ -422,11 +468,6 @@
   }
 
   var actions = {
-    'go-home': go('home'),
-    'go-services': go('services'),
-    'go-about': go('about'),
-    'go-prices': go('prices'),
-    'go-contact': go('booking'),
     'go-booking': function () {
       setState({ menuOpen: false });
       window.open('https://halo-health-limited.au5.cliniko.com/bookings', '_blank', 'noopener');
@@ -442,6 +483,17 @@
     },
   };
 
+  var CJK_FONTS = 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+TC:wght@500&family=Noto+Serif+SC:wght@500&display=swap';
+  var cjkLoaded = false;
+  function ensureCjkFonts(lang) {
+    if (cjkLoaded || lang.indexOf('zh') !== 0) return;
+    cjkLoaded = true;
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = CJK_FONTS;
+    document.head.appendChild(link);
+  }
+
   function setLang(code) {
     try { localStorage.setItem(LANG_KEY, code); } catch (e) { }
     setState({ lang: code });
@@ -452,6 +504,7 @@
 
   function renderServices(L) {
     var container = el('#services-list');
+    if (!container) return;
     container.innerHTML = '';
     SERVICES_BASE.forEach(function (base, i) {
       var s = L.services[i];
@@ -486,6 +539,7 @@
 
   function renderFaqs(L) {
     var container = el('#faq-list');
+    if (!container) return;
     container.innerHTML = '';
     L.faqs.forEach(function (f, i) {
       var open = state.openFaq === i;
@@ -510,6 +564,7 @@
 
   function renderCredentials(L) {
     var container = el('#credentials-list');
+    if (!container) return;
     container.innerHTML = '';
     L.credentials.forEach(function (c) {
       var span = document.createElement('span');
@@ -521,6 +576,7 @@
 
   function renderPrices(L) {
     var container = el('#prices-list');
+    if (!container) return;
     container.innerHTML = '';
     L.prices.forEach(function (p, i) {
       var base = PRICES_BASE[i];
@@ -540,15 +596,19 @@
   }
 
   function renderSlideshow(L) {
+    if (!el('#slide-0')) return;
     SLIDES.forEach(function (sl, i) {
       var node = el('#slide-' + i);
+      if (!node) return;
       var active = i === state.slide;
       node.style.opacity = active ? 1 : 0;
       node.style.zIndex = active ? 2 : 1;
       node.style.transform = KEN_BURNS ? (active ? 'scale(1.06)' : 'scale(1)') : 'none';
-      node.setAttribute('aria-label', L.t[sl.altKey] || '');
+      if (node.tagName === 'IMG') node.alt = L.t[sl.altKey] || '';
+      else node.setAttribute('aria-label', L.t[sl.altKey] || '');
     });
     var dotsContainer = el('#slide-dots');
+    if (!dotsContainer) return;
     dotsContainer.innerHTML = '';
     SLIDES.forEach(function (sl, i) {
       var active = i === state.slide;
@@ -563,6 +623,7 @@
   function renderReviews() {
     for (var i = 0; i < 2; i++) {
       var node = el('#review-' + i);
+      if (!node) continue;
       node.style.opacity = i === state.review ? 1 : 0;
     }
   }
@@ -587,6 +648,7 @@
   function renderMenu() {
     var open = state.menuOpen;
     var toggle = el('#menu-toggle');
+    if (!toggle) return;
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     el('#burger-top').style.cssText = 'display: block; width: 21px; height: 2px; border-radius: 2px; background: #F8ECEE; transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), opacity 0.18s ease; transform: ' + (open ? 'translateY(6px) rotate(45deg)' : 'none') + ';';
     el('#burger-mid').style.cssText = 'display: block; width: 21px; height: 2px; border-radius: 2px; background: #F8ECEE; transition: transform 0.28s cubic-bezier(0.16,1,0.3,1), opacity 0.18s ease; opacity: ' + (open ? 0 : 1) + ';';
@@ -610,6 +672,13 @@
     });
   }
 
+  function renderSeoH1(L) {
+    var pk = (document.body && document.body.getAttribute('data-page-key')) || 'home';
+    var map = SEO_H1[state.lang] || SEO_H1.en;
+    var node = document.querySelector('[data-seo-h1]');
+    if (node && map && map[pk]) node.textContent = map[pk];
+  }
+
   function renderI18nText(L) {
     els('[data-i18n]').forEach(function (node) {
       var key = node.getAttribute('data-i18n');
@@ -620,6 +689,7 @@
   function renderHeroLines(L) {
     var lines = [L.t.heroCalm1, L.t.heroCalm2].filter(function (s) { return typeof s === 'string' && s.trim(); });
     var container = el('#hero-lines');
+    if (!container) return;
     container.innerHTML = '';
     lines.forEach(function (ln) {
       var span = document.createElement('span');
@@ -634,10 +704,13 @@
     var L = I18N[lang];
     try {
       document.documentElement.lang = L.htmlLang;
-      document.title = L.docTitle;
+      var pk = (document.body && document.body.getAttribute('data-page-key')) || 'home';
+      document.title = (PAGE_TITLES[state.lang] && PAGE_TITLES[state.lang][pk]) || L.docTitle;
     } catch (e) { }
 
+    ensureCjkFonts(state.lang);
     renderI18nText(L);
+    renderSeoH1(L);
     renderHeroLines(L);
     renderServices(L);
     renderFaqs(L);

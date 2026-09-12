@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://halohealthphysio.co.nz/sitemap.xml
