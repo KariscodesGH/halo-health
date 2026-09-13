@@ -132,7 +132,7 @@
         accLabel: 'ACC', privateLabel: 'Private',
         bookingEyebrow: 'Book an appointment', bookingTitle: "Let's get you moving",
         bookingSub: 'No referral required · ACC & private welcome',
-        bookOnline: 'Book online with Cliniko →',
+        bookOnline: 'Book online with ManaNotes →',
         stepsEyebrow: 'How it works', stepsTitle: 'Three steps to your appointment',
         step1: '1. Click "Book online" above',
         step2: '2. Choose a time and fill in your details',
@@ -242,7 +242,7 @@
         accLabel: 'ACC', privateLabel: '自費',
         bookingEyebrow: '預約看診', bookingTitle: '開始您的康復之旅',
         bookingSub: '無需轉介 · 歡迎 ACC 與自費客戶',
-        bookOnline: '透過 Cliniko 線上預約 →',
+        bookOnline: '透過 ManaNotes 線上預約 →',
         stepsEyebrow: '如何預約', stepsTitle: '三步完成預約',
         step1: '1. 點擊上方「線上預約」按鈕',
         step2: '2. 選擇時間並填寫您的資料',
@@ -352,7 +352,7 @@
         accLabel: 'ACC', privateLabel: '自费',
         bookingEyebrow: '预约就诊', bookingTitle: '开始您的康复之旅',
         bookingSub: '无需转介 · 欢迎 ACC 与自费客户',
-        bookOnline: '通过 Cliniko 在线预约 →',
+        bookOnline: '通过 ManaNotes 在线预约 →',
         stepsEyebrow: '如何预约', stepsTitle: '三步完成预约',
         step1: '1. 点击上方"在线预约"按钮',
         step2: '2. 选择时间并填写您的信息',
@@ -470,7 +470,7 @@
   var actions = {
     'go-booking': function () {
       setState({ menuOpen: false });
-      window.open('https://halo-health-limited.au5.cliniko.com/bookings', '_blank', 'noopener');
+      window.open('https://booking.mananotes.co.nz/halo/v2', '_blank', 'noopener');
     },
     'toggle-menu': function () {
       setState(function (s) { return { menuOpen: !s.menuOpen }; });
